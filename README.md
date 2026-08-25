@@ -56,4 +56,7 @@ een nieuwe entry in `lib/klanten.ts` — geen andere code hoeft aangepast te wor
 
 ## Live
 
-_Vercel-link volgt hier na deployment._
+<https://aanbiedingsportaal.vercel.app>
+
+- Hoffmann: <https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann>
+- Krüger: <https://aanbiedingsportaal.vercel.app/aanbieding/kruger>
