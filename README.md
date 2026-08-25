@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aanbiedingsportaal
 
-## Getting Started
+Praktijkcase van Nodient: een mobiel aanbiedingsportaal voor Van Rooij Bloemen BV.
+Sander kiest een klant, de pagina toont de bijpassende voorraad met prijs, en er is
+een kant-en-klaar Duits WhatsApp-bericht om erbij te sturen.
 
-First, run the development server:
+Het denkwerk (probleem, keuzes, de 3 vragen, AI-gebruik) staat in [DENKEN.md](./DENKEN.md).
+
+## Aan de praat krijgen
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000> — daar staan links naar de twee cases:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Hoffmann** (Keulen): <http://localhost:3000/aanbieding/hoffmann> — rozen, lengte 50
+- **Krüger** (Bremen): <http://localhost:3000/aanbieding/kruger> — tulpen, niet ouder dan 3 dagen
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Geen `.env`, database of inlog nodig.
 
-## Learn More
+Om de Duitse WhatsApp-teksten opnieuw te genereren (bv. na een prijswijziging):
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx tsx scripts/genereer-berichten.ts
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+De laatste output staat ook in [output-whatsapp-berichten.txt](./output-whatsapp-berichten.txt).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Waar de prijslogica staat
 
-## Deploy on Vercel
+Alles wat met prijs, filtering en data-cleaning te maken heeft, staat in `/lib` — bewust
+losgekoppeld van de pagina's, want "die regels gaan veranderen":
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Bestand | Verantwoordelijkheid |
+|---|---|
+| [`lib/stock.ts`](./lib/stock.ts) | CSV inlezen, dedupliceren, ongeldige regels uitsluiten, leeftijd berekenen |
+| [`lib/pricing.ts`](./lib/pricing.ts) | De prijsformule uit Sanders mail (Bijlage B), als pure functie |
+| [`lib/klanten.ts`](./lib/klanten.ts) | Per klant: filter, marge-afspraak, eenheid (steel/bos), taal |
+| [`lib/filter.ts`](./lib/filter.ts) | Combineert voorraad + klantfilter + prijs tot een aanbieding |
+| [`lib/orders.ts`](./lib/orders.ts) | Simpele voorraadafboeking bij bestellen (zie vraag 2 in DENKEN.md) |
+| [`lib/whatsapp.ts`](./lib/whatsapp.ts) | Genereert de Duitse berichttekst |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Een nieuwe klant toevoegen** (bv. volgende maand, met een eigen prijsafspraak) betekent:
+een nieuwe entry in `lib/klanten.ts` — geen andere code hoeft aangepast te worden.
+
+## Wat er bewust simpel is gehouden
+
+- Geen database — de voorraad komt uit `data/voorraad-29-05.csv`, klanten staan hardcoded in `lib/klanten.ts`.
+- Geen inlog of beheerscherm.
+- Foto's zijn een grijs vlak.
+- De bestel-flow (`lib/orders.ts`) houdt voorraad in het geheugen van de server bij — genoeg om
+  het principe te laten werken (zie vraag 2), maar reset bij een herstart en is niet
+  concurrency-safe op productieschaal. Zie DENKEN.md voor wat daar met meer tijd bij zou moeten.
+
+## Live
+
+_Vercel-link volgt hier na deployment._
