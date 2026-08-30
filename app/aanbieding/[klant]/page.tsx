@@ -1,15 +1,32 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { vindKlant } from "@/lib/klanten";
 import { bouwAanbieding } from "@/lib/filter";
 import { formatEuro } from "@/lib/pricing";
+import { parseFilterUitSearchParams } from "@/lib/querySearchParams";
 import BestelKnop from "../BestelKnop";
 
-export default async function AanbiedingPagina({ params }: PageProps<"/aanbieding/[klant]">) {
+export default async function AanbiedingPagina({ params, searchParams }: PageProps<"/aanbieding/[klant]">) {
   const { klant: slug } = await params;
   const klant = vindKlant(slug);
   if (!klant) notFound();
 
-  const { regels } = bouwAanbieding(klant);
+  const filter = parseFilterUitSearchParams(await searchParams);
+  if (!filter) {
+    return (
+      <main className="mx-auto flex min-h-screen max-w-md flex-col gap-4 p-4">
+        <p className="text-gray-600">
+          Er is nog geen filter gekozen voor {klant.naam}. Ga naar{" "}
+          <Link href={`/sander?klant=${klant.slug}`} className="text-blue-700 underline">
+            /sander
+          </Link>{" "}
+          om een aanbieding samen te stellen.
+        </p>
+      </main>
+    );
+  }
+
+  const { regels } = bouwAanbieding(klant, filter);
 
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col gap-4 p-4">
@@ -18,7 +35,6 @@ export default async function AanbiedingPagina({ params }: PageProps<"/aanbiedin
         <h1 className="text-2xl font-semibold">
           {klant.naam} <span className="text-gray-400">— {klant.plaats}</span>
         </h1>
-        <p className="text-sm text-gray-500">{klant.filterBeschrijving}</p>
       </header>
 
       {regels.length === 0 && (

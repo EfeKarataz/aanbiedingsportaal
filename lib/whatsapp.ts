@@ -1,5 +1,5 @@
 import { formatEuro } from "./pricing";
-import type { Aanbieding } from "./filter";
+import { filterBeschrijvingDe, type Aanbieding } from "./filter";
 
 /** Duitse eenheid voor een prijs-per-stuk ("€0,12 / Stiel"), altijd enkelvoud. */
 function eenheidWoord(eenheid: "steel" | "bos"): string {
@@ -30,12 +30,13 @@ function kleurDe(kleur: string): string {
  * (Hoffmann per bos, anderen per steel — zie klanten.ts).
  */
 export function genereerWhatsappBericht(aanbieding: Aanbieding, portaalUrl: string): string {
-  const { klant, regels } = aanbieding;
+  const { klant, filter, regels } = aanbieding;
+  const beschrijvingDe = filterBeschrijvingDe(filter);
 
   if (regels.length === 0) {
     return [
       `Hallo ${klant.naam},`,
-      `heute leider nichts Passendes auf Lager (${klant.filterBeschrijvingDe}).`,
+      `heute leider nichts Passendes auf Lager (${beschrijvingDe}).`,
       `Ich melde mich, sobald wieder etwas da ist.`,
       `Sander`,
     ].join("\n");
@@ -50,7 +51,7 @@ export function genereerWhatsappBericht(aanbieding: Aanbieding, portaalUrl: stri
 
   return [
     `Hallo ${klant.naam},`,
-    `heutiges Angebot (${klant.filterBeschrijvingDe}):`,
+    `heutiges Angebot (${beschrijvingDe}):`,
     regelsTekst,
     ``,
     `Alles ansehen und bestellen: ${portaalUrl}`,

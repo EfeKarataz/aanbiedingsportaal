@@ -18,12 +18,19 @@ pagina te geven waar hij direct op kan klikken.
 
 ## Wat ik bouw
 
-Eén aanbiedingspagina per klant (`/aanbieding/hoffmann`, `/aanbieding/kruger`) die de
-voorraad-export leest, opschoont, filtert op wat deze klant vraagt, en de prijs berekent
-volgens Sanders regels (Bijlage B) — inclusief zijn klantspecifieke afspraken (Hoffmann:
-marge 3 i.p.v. 4, prijs per bos i.p.v. per steel). Elke regel heeft een bestelknop die de
-voorraad direct afboekt. Daarnaast een generator voor het Duitse WhatsApp-bericht dat
-Sander erbij stuurt.
+Een `/sander`-pagina waar hij een klant én een filter kiest (soort, lengte, max leeftijd)
+— dat filter ligt bewust niet vast per klant, want dezelfde klant kan morgen iets anders
+vragen. Daaruit komt een link naar de klantpagina (`/aanbieding/hoffmann?type=roos&lengte=50`)
+en de Duitse WhatsApp-tekst, klaar om te versturen. De klantpagina leest de voorraad-export,
+past het gekozen filter toe, en berekent de prijs volgens Sanders regels (Bijlage B) —
+inclusief de blijvende klantspecifieke afspraken die wél vastliggen (Hoffmann: marge 3
+i.p.v. 4, prijs per bos i.p.v. per steel). Elke regel heeft een bestelknop die de voorraad
+direct afboekt.
+
+Eerste versie had het filter nog vast per klant staan in plaats van iets dat Sander per
+keer kiest — een te letterlijke lezing van "laat het werken voor deze twee gevallen".
+Na doorvragen bleek dat niet te kloppen met "Sander kiest een klant én een filter", en is
+dit gecorrigeerd naar de opzet hierboven.
 
 ## Wat ik bewust weglaat
 

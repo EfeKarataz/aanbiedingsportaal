@@ -1,8 +1,8 @@
 # Aanbiedingsportaal
 
 Praktijkcase van Nodient: een mobiel aanbiedingsportaal voor Van Rooij Bloemen BV.
-Sander kiest een klant, de pagina toont de bijpassende voorraad met prijs, en er is
-een kant-en-klaar Duits WhatsApp-bericht om erbij te sturen.
+Sander kiest op `/sander` een klant en een filter (soort, lengte, max leeftijd); daar
+komt een link naar de klantpagina én de Duitse WhatsApp-tekst uit.
 
 Het denkwerk (probleem, keuzes, de 3 vragen, AI-gebruik) staat in [DENKEN.md](./DENKEN.md).
 
@@ -13,10 +13,11 @@ npm install
 npm run dev
 ```
 
-Open <http://localhost:3000> — daar staan links naar de twee cases:
+Open <http://localhost:3000/sander> — kies een klant en filter, en de pagina genereert de
+klantlink en het WhatsApp-bericht. De twee cases uit de opdracht direct als link:
 
-- **Hoffmann** (Keulen): <http://localhost:3000/aanbieding/hoffmann> — rozen, lengte 50
-- **Krüger** (Bremen): <http://localhost:3000/aanbieding/kruger> — tulpen, niet ouder dan 3 dagen
+- **Hoffmann** (Keulen): <http://localhost:3000/aanbieding/hoffmann?type=roos&lengte=50> — rozen, lengte 50
+- **Krüger** (Bremen): <http://localhost:3000/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3> — tulpen, niet ouder dan 3 dagen
 
 Geen `.env`, database of inlog nodig.
 
@@ -37,13 +38,16 @@ losgekoppeld van de pagina's, want "die regels gaan veranderen":
 |---|---|
 | [`lib/stock.ts`](./lib/stock.ts) | CSV inlezen, dedupliceren, ongeldige regels uitsluiten, leeftijd berekenen |
 | [`lib/pricing.ts`](./lib/pricing.ts) | De prijsformule uit Sanders mail (Bijlage B), als pure functie |
-| [`lib/klanten.ts`](./lib/klanten.ts) | Per klant: filter, marge-afspraak, eenheid (steel/bos), taal |
-| [`lib/filter.ts`](./lib/filter.ts) | Combineert voorraad + klantfilter + prijs tot een aanbieding |
+| [`lib/klanten.ts`](./lib/klanten.ts) | Per klant: marge-afspraak, eenheid (steel/bos), taal — blijvende afspraken, geen dagelijkse keuze |
+| [`lib/filter.ts`](./lib/filter.ts) | Het filter dat Sander per keer kiest (soort/lengte/max leeftijd) + combineert dat met voorraad en prijs tot een aanbieding |
 | [`lib/orders.ts`](./lib/orders.ts) | Simpele voorraadafboeking bij bestellen (zie vraag 2 in DENKEN.md) |
 | [`lib/whatsapp.ts`](./lib/whatsapp.ts) | Genereert de Duitse berichttekst |
 
-**Een nieuwe klant toevoegen** (bv. volgende maand, met een eigen prijsafspraak) betekent:
-een nieuwe entry in `lib/klanten.ts` — geen andere code hoeft aangepast te worden.
+**Belangrijk onderscheid:** het filter (wat een klant vandaag vraagt) ligt niet vast per
+klant — dat kiest Sander elke keer opnieuw op `/sander`. Alleen de blijvende afspraken
+(marge, eenheid, taal) horen bij de klant. **Een nieuwe klant toevoegen** (bv. volgende
+maand, met een eigen prijsafspraak) betekent: een nieuwe entry in `lib/klanten.ts` — geen
+andere code hoeft aangepast te worden.
 
 ## Wat er bewust simpel is gehouden
 
@@ -56,7 +60,7 @@ een nieuwe entry in `lib/klanten.ts` — geen andere code hoeft aangepast te wor
 
 ## Live
 
-<https://aanbiedingsportaal.vercel.app>
+<https://aanbiedingsportaal.vercel.app/sander>
 
-- Hoffmann: <https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann>
-- Krüger: <https://aanbiedingsportaal.vercel.app/aanbieding/kruger>
+- Hoffmann: <https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann?type=roos&lengte=50>
+- Krüger: <https://aanbiedingsportaal.vercel.app/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3>

@@ -1,6 +1,8 @@
 
 === Hoffmann (Keulen) ===
 
+Link: https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann?type=roos&lengte=50
+
 Hallo Hoffmann,
 heutiges Angebot (Rosen, Länge 50):
 - Athena (rot, Länge 50): €2,15 / Bund
@@ -9,15 +11,17 @@ heutiges Angebot (Rosen, Länge 50):
 - Freedom (rot, Länge 50): €1,65 / Bund
 - Red Naomi (rot, Länge 50): €3,04 / Bund
 
-Alles ansehen und bestellen: https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann
+Alles ansehen und bestellen: https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann?type=roos&lengte=50
 Sander
 
 === Krüger (Bremen) ===
+
+Link: https://aanbiedingsportaal.vercel.app/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3
 
 Hallo Krüger,
 heutiges Angebot (Tulpen, nicht älter als 3 Tage):
 - Ad Rem (rot, Länge 40): €0,12 / Stiel
 - Strong Gold (gelb, Länge 40): €0,11 / Stiel
 
-Alles ansehen und bestellen: https://aanbiedingsportaal.vercel.app/aanbieding/kruger
+Alles ansehen und bestellen: https://aanbiedingsportaal.vercel.app/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3
 Sander
