@@ -3,7 +3,7 @@ import { berekenPrijs, type PrijsResultaat } from "./pricing";
 import type { Klant } from "./klanten";
 
 /**
- * Wat Sander vandaag kiest voor een klant — dit is bewust géén vast onderdeel
+ * Wat Sander vandaag kiest voor een klant. Dit is bewust géén vast onderdeel
  * van de klant (zie klanten.ts): dezelfde klant kan morgen iets anders vragen.
  * `lengte` en `maxLeeftijdDagen` zijn optioneel omdat niet elke klant daar
  * altijd iets over zegt.

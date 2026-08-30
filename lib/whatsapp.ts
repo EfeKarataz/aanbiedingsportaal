@@ -8,7 +8,7 @@ function eenheidWoord(eenheid: "steel" | "bos"): string {
 
 /**
  * Kleurnamen in de bron zijn Nederlands. "rot" (bij Red Naomi) is zelf al
- * Duits — waarschijnlijk een export-inconsistentie in de bron, toevallig
+ * Duits, waarschijnlijk een export-inconsistentie in de bron, toevallig
  * ook het juiste Duitse woord voor "rood".
  */
 const KLEUR_NL_NAAR_DE: Record<string, string> = {
@@ -27,7 +27,7 @@ function kleurDe(kleur: string): string {
 /**
  * Genereert de Duitse WhatsApp-tekst die Sander bij de link stuurt.
  * Eén regel per artikel, prijs in de eenheid die deze klant gewend is
- * (Hoffmann per bos, anderen per steel — zie klanten.ts).
+ * (Hoffmann per bos, anderen per steel, zie klanten.ts).
  */
 export function genereerWhatsappBericht(aanbieding: Aanbieding, portaalUrl: string): string {
   const { klant, filter, regels } = aanbieding;

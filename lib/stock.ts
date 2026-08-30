@@ -23,7 +23,7 @@ export interface RejectedRow {
 
 /**
  * Referentiedatum voor "leeftijd" is de dag van de export zelf (29-05-2026),
- * niet de systeemdatum — de export is een momentopname uit het verleden.
+ * niet de systeemdatum: de export is een momentopname uit het verleden.
  */
 const REFERENTIEDATUM = { dag: 29, maand: 5 };
 
@@ -35,7 +35,7 @@ function parseDatum(raw: string): number {
   return dagVanJaar(REFERENTIEDATUM.maand, REFERENTIEDATUM.dag) - dagVanJaar(maand, dag);
 }
 
-/** Lengte kan als "50", "L50" of "50 cm" genoteerd zijn — normaliseer naar het numerieke deel. */
+/** Lengte kan als "50", "L50" of "50 cm" genoteerd zijn; normaliseer naar het numerieke deel. */
 function parseLengte(raw: string): number {
   const match = raw.match(/\d+/);
   if (!match) throw new Error(`Kan lengte niet lezen: "${raw}"`);
@@ -87,7 +87,7 @@ export function laadStock(): { rows: StockRow[]; rejected: RejectedRow[] } {
     const inkoop = parseGetal(inkoopPerSteel);
     // Een geldige inkoopprijs per steel ligt in de praktijk tussen de paar
     // cent en een paar euro. "13" (i.p.v. "0,13") is duidelijk een tikfout
-    // in de bron, maar welk cijfer eraf moet is gokken — dus uitsluiten.
+    // in de bron, maar welk cijfer eraf moet is gokken, dus uitsluiten.
     if (inkoop <= 0 || inkoop >= 5) {
       rejected.push({ raw, reden: `onmogelijke inkoopprijs per steel (${inkoopPerSteel})` });
       continue;

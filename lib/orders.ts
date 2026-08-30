@@ -6,7 +6,7 @@ import { laadStock } from "./stock";
  * Dit is het antwoord op vraag 2 (Hoffmann en Krüger die allebei een
  * aanbieding met dezelfde emmers krijgen): de eerste bestelling die
  * binnenkomt boekt direct af, een tweede bestelling op dezelfde partij
- * krijgt te horen dat het (deels) niet meer beschikbaar is — in plaats van
+ * krijgt te horen dat het (deels) niet meer beschikbaar is, in plaats van
  * dat beide een toezegging krijgen die niet waargemaakt kan worden.
  *
  * Bewuste beperking: dit is een module-level Map, geen database of

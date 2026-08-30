@@ -14,16 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Aanbiedingsportaal",
-  description: "Van Rooij Bloemen — dagelijkse aanbieding per klant",
+  description: "Van Rooij Bloemen: dagelijkse aanbieding per klant",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="nl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col bg-slate-50">{children}</body>
     </html>
   );
 }
