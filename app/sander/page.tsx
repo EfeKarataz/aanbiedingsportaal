@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { KLANTEN } from "@/lib/klanten";
 import { bouwAanbieding, filterBeschrijvingNl } from "@/lib/filter";
 import { genereerWhatsappBericht } from "@/lib/whatsapp";
@@ -35,6 +36,10 @@ export default async function SanderPagina({ searchParams }: PageProps<"/sander"
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col gap-6 p-6">
       <PageHeader title="Aanbieding maken" subtitle="Kies een klant en een filter. Dit is Sanders kant van het portaal." />
+
+      <Link href="/voorraad" className="text-sm text-emerald-700 underline decoration-emerald-300 underline-offset-2">
+        Bekijk de actuele voorraad →
+      </Link>
 
       <form
         method="get"

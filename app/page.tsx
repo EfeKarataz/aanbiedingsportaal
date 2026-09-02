@@ -42,15 +42,27 @@ export default function Home() {
     <main className="mx-auto flex min-h-screen max-w-md flex-col gap-6 p-6">
       <PageHeader title="Aanbiedingsportaal" subtitle="Dagelijkse aanbieding per klant, in een paar klikken." />
 
-      <Link
-        href="/sander"
-        className="flex items-center justify-between rounded-xl bg-emerald-600 p-4 font-medium text-white shadow-sm transition hover:bg-emerald-700"
-      >
-        Nieuwe aanbieding maken
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </Link>
+      <div className="flex flex-col gap-3">
+        <Link
+          href="/sander"
+          className="flex items-center justify-between rounded-xl bg-emerald-600 p-4 font-medium text-white shadow-sm transition hover:bg-emerald-700"
+        >
+          Nieuwe aanbieding maken
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+
+        <Link
+          href="/voorraad"
+          className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 font-medium text-slate-700 shadow-sm transition hover:border-emerald-300"
+        >
+          Bekijk voorraad
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-slate-400" aria-hidden>
+            <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+      </div>
 
       <div className="flex flex-col gap-2">
         <p className="text-xs font-semibold tracking-wide text-slate-400 uppercase">Voorbeelden uit de case</p>

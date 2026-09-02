@@ -19,6 +19,9 @@ klantlink en het WhatsApp-bericht. De twee cases uit de opdracht direct als link
 - **Hoffmann** (Keulen), <http://localhost:3000/aanbieding/hoffmann?type=roos&lengte=50>: rozen, lengte 50
 - **Krüger** (Bremen), <http://localhost:3000/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3>: tulpen, niet ouder dan 3 dagen
 
+Op <http://localhost:3000/voorraad> staat de volledige, opgeschoonde voorraad (ongefilterd),
+met wat er bij het opschonen is genegeerd en waarom.
+
 Geen `.env`, database of inlog nodig.
 
 Om de Duitse WhatsApp-teksten opnieuw te genereren (bv. na een prijswijziging):
@@ -64,3 +67,4 @@ andere code hoeft aangepast te worden.
 
 - Hoffmann: <https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann?type=roos&lengte=50>
 - Krüger: <https://aanbiedingsportaal.vercel.app/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3>
+- Voorraad: <https://aanbiedingsportaal.vercel.app/voorraad>
