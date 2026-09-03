@@ -6,7 +6,20 @@ komt een link naar de klantpagina én de Duitse WhatsApp-tekst uit.
 
 Het denkwerk (probleem, keuzes, de 3 vragen, AI-gebruik) staat in [DENKEN.md](./DENKEN.md).
 
-## Aan de praat krijgen
+## Live, geen installatie nodig
+
+Het portaal staat live op Vercel. Niets lokaal installeren nodig om het te proberen,
+gewoon de link openen (werkt ook op een telefoon, zoals Sander het zou gebruiken):
+
+- **Sander-kant** (klant + filter kiezen): <https://aanbiedingsportaal.vercel.app/sander>
+- **Hoffmann** (Keulen): <https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann?type=roos&lengte=50>, rozen, lengte 50
+- **Krüger** (Bremen): <https://aanbiedingsportaal.vercel.app/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3>, tulpen, niet ouder dan 3 dagen
+- **Voorraad** (volledig overzicht): <https://aanbiedingsportaal.vercel.app/voorraad>
+
+## Lokaal draaien (optioneel)
+
+Alleen nodig als je in de code wilt kijken of iets wilt aanpassen; voor het bekijken van
+het portaal zelf is dit niet nodig, zie hierboven.
 
 ```bash
 npm install
@@ -14,13 +27,8 @@ npm run dev
 ```
 
 Open <http://localhost:3000/sander>, kies een klant en filter, en de pagina genereert de
-klantlink en het WhatsApp-bericht. De twee cases uit de opdracht direct als link:
-
-- **Hoffmann** (Keulen), <http://localhost:3000/aanbieding/hoffmann?type=roos&lengte=50>: rozen, lengte 50
-- **Krüger** (Bremen), <http://localhost:3000/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3>: tulpen, niet ouder dan 3 dagen
-
-Op <http://localhost:3000/voorraad> staat de volledige, opgeschoonde voorraad (ongefilterd),
-met wat er bij het opschonen is genegeerd en waarom.
+klantlink en het WhatsApp-bericht. Dezelfde routes als hierboven werken ook lokaal, op
+`localhost:3000` in plaats van het Vercel-domein.
 
 Geen `.env`, database of inlog nodig.
 
@@ -60,11 +68,3 @@ andere code hoeft aangepast te worden.
 - De bestel-flow (`lib/orders.ts`) houdt voorraad in het geheugen van de server bij, genoeg om
   het principe te laten werken (zie vraag 2), maar reset bij een herstart en is niet
   concurrency-safe op productieschaal. Zie DENKEN.md voor wat daar met meer tijd bij zou moeten.
-
-## Live
-
-<https://aanbiedingsportaal.vercel.app/sander>
-
-- Hoffmann: <https://aanbiedingsportaal.vercel.app/aanbieding/hoffmann?type=roos&lengte=50>
-- Krüger: <https://aanbiedingsportaal.vercel.app/aanbieding/kruger?type=tulp&maxLeeftijdDagen=3>
-- Voorraad: <https://aanbiedingsportaal.vercel.app/voorraad>
